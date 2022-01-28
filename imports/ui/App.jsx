@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 
@@ -26,8 +26,11 @@ const schema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(schema);
 
-export const App = () => (
-  <div>
-    <AutoForm schema={bridge} onSubmit={console.log}/>
-  </div>
-);
+export const App = () => {
+  var [showForm, setShowForm] = useState(false);
+
+ return (<div>
+    <button onClick={() => setShowForm(!showForm)} >toggle form</button>
+    {showForm && <AutoForm schema={bridge} onSubmit={console.log}/>}
+  </div>)
+};
